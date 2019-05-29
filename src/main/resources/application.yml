@@ -1,0 +1,49 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 8010
+  connection-timeout: 5000ms
+  servlet:
+    context-path: /shiro
+# 数据库访问配置
+# 对应MariaDB驱动
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    # 数据源配置
+    url: jdbc:mysql://127.0.0.1:3306/test?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    # 配置Springboot默认支持的Hikari数据库连接池
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  # Spring Data JPA配置
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        hbm2ddl:
+          auto: update
+          format_sql: true
+    show-sql: true
+
+  # 格式化输出的json字符串
+  jackson:
+    serialization:
+      indent_output: true
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  # 设置控制台彩色打印
+  output:
+    ansi:
+      enabled: ALWAYS
